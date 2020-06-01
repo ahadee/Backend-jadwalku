@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 app.get("/",(req, res) => {
-    res.status(200).json({ message: "Ini Backend jadwalKu" })
+    res.status(200).json({ message: "Selamat Datang di jadwalKu" })
 })
 app.use("/users", require("./routes/users"))
 app.use("/todos", require("./routes/todo"))
