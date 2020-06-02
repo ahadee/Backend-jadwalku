@@ -17,10 +17,10 @@ module.exports = {
         }
     },
     getByID: async (req, res) => {
-        const { id } = req.params
+        const { userID } = req.params
         try {
             const result = await Todos.findAll({
-                where: { id: id }
+                where: { userID: userID }
             })
 
             res.status(200).json({
