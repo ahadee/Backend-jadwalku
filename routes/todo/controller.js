@@ -1,6 +1,8 @@
 const { Todos } = require("../../models")
 // const jwt = require("jsonwebtoken")
 // const bcrypt = require("bcrypt")
+const { Op } = require("sequelize");
+
 
 module.exports = {
     getAll: async (req, res) => {
@@ -32,8 +34,30 @@ module.exports = {
 
         }
     },
+    getByDate: async (req, res) => {
+        const { date, UserID } = req.params
+        try {
+            const result = await Todos.findAll({
+                where: {
+                    createdAt: {
+                        // [Op.lt]: new Date(),
+                        [Op.gt]: new Date(date)
+                    }, 
+                    userID: UserID
+                }
+            })
+
+            res.status(200).json({
+                message: "Get data Todos by Date",
+                data: result,
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
     // create: async (req,res) => {
-        
+
     //     // const result = await Todos.findOne({email : email });
     //     // if (result) return res.status(401).send("Your email has already registered");
     //     try {
