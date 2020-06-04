@@ -1,19 +1,19 @@
 const Sequelize = require("sequelize")
 const {db} = require("../config")
 
-const Todos = db.define('todos', {
+const Todos = db.define('list_todos', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    todo: {
-        type: Sequelize.STRING,
+    deadline: {
+        type: Sequelize.DATE,
         allowNull: false,   
     },
-    status: {
-        type: Sequelize.STRING,
+    createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
     },
     userID: {

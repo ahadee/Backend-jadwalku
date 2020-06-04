@@ -1,16 +1,20 @@
 const Sequelize = require("sequelize")
 const {db} = require("../config")
 
-const Todos = db.define('todos', {
+const DetailTodos = db.define('detail_todos', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
+    id_list_todo: {
+        type: Sequelize.INTEGER,
+        allowNull: false,   
+    },
     todo: {
         type: Sequelize.STRING,
-        allowNull: false,   
+        allowNull: false,
     },
     status: {
         type: Sequelize.STRING,
@@ -22,4 +26,4 @@ const Todos = db.define('todos', {
     },
 })
 
-module.exports = Todos
+module.exports = DetailTodos
