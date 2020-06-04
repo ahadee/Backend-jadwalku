@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { getAll, getByID, getByDate, getAllTodo } = require("./controller")
 
-// router.get("/",getAll)
+router.get("/",getAll)
 router.get("/:userID",getByID)
 // router.get("/:userID/:date",getByDate)
 // router.get("/getall/:id/",getAllTodo)

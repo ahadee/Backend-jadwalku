@@ -18,4 +18,17 @@ module.exports = {
 
         }
     },
+    getAll: async (req, res) => {
+        try {
+            const result = await Todos.findAll({})
+
+            res.status(200).json({
+                message: "Get All data Todos",
+                data: result,
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
 }
