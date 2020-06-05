@@ -16,6 +16,21 @@ module.exports = {
 
         }
     },
+    getAllEmployee: async (req, res) => {
+        try {
+            const result = await User.findAll({
+                where: {role: 'employee'}
+            })
+
+            res.status(200).json({
+                message: "Get All Data Employee",
+                data: result,
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
     getByID: async (req, res) => {
         const { id } = req.params
         try {
