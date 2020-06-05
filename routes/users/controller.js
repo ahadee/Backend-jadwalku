@@ -19,7 +19,7 @@ module.exports = {
     getAllEmployee: async (req, res) => {
         try {
             const result = await User.findAll({
-                where: {role: 'employee'}
+                where: { role: 'employee' }
             })
 
             res.status(200).json({
@@ -47,12 +47,12 @@ module.exports = {
 
         }
     },
-    create: async (req,res) => {
-        
+    create: async (req, res) => {
+
         // const result = await User.findOne({email : email });
         // if (result) return res.status(401).send("Your email has already registered");
         try {
-            const { password, first_name, last_name, email} = req.body
+            const { password, first_name, last_name, email } = req.body
             const result = await User.create({
                 email,
                 password,
@@ -98,6 +98,25 @@ module.exports = {
 
         }
     },
+    destroy: async (req, res) => {
+        try {
+            const { id } = req.params
+            const result = await User.destroy({
+                where: {
+                    id: id
+                }
+            })
+            const getAll = await User.findAll({
+                where: { id: id }
+            })
+            res.status(200).json({
+                message: "Delete data is successfully",
+                data: getAll,
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    },
     login: async (req, res) => {
         try {
             const { email, password } = req.body;
@@ -109,13 +128,13 @@ module.exports = {
                 }
             });
             console.log(result.length);
-            
+
             if (result.length === 0) {
                 res.status(403).send({
                     message: "Your email not registered"
                 })
             }
-            else if (password != result[0].password){
+            else if (password != result[0].password) {
                 res.status(403).send({
                     message: "Your password is wrong"
                 })
@@ -126,25 +145,6 @@ module.exports = {
                     data: result,
                 })
             }
-            // console.log(result);
-
-
-
-            // const { id } = result;
-
-            // bcrypt.compare(password, result.password).then((response) => {
-            //     if (response === true) {
-            //         const token = jwt.sign({ id }, SECRET_KEY, {
-            //             expiresIn: "1h",
-            //         });
-
-            //         res.status(200).send({ token: token });
-            //     } else {
-            //         res.status(401).send({
-            //             message: "Your are not allowed to enter this api",
-            //         });
-            //     }
-            // });
         } catch (error) {
             res.status(401).send({
                 message: "Your password not match",
