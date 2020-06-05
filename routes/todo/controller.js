@@ -39,15 +39,15 @@ module.exports = {
                 status
             },
                 {
-                    where: { 
-                        userID: userID, 
+                    where: {
+                        userID: userID,
                         id: id
                     }
                 })
             const getAll = await Todos.findAll({
-                where: { 
-                    userID: userID, 
-                    id : id
+                where: {
+                    userID: userID,
+                    id: id
                 }
             })
 
@@ -58,6 +58,28 @@ module.exports = {
         } catch (error) {
             console.log(error);
 
+        }
+    },
+    create: async (req, res) => {
+
+        try {
+            const { todo, status, } = req.body
+            const {userID} = req.params
+            const result = await Todos.create({
+                todo,
+                status,
+                userID,
+                where : {
+                    userID: userID
+                }
+            })
+
+            res.status(200).json({
+                message: "Create new todo is successfully",
+                data: result,
+            })
+        } catch (error) {
+            console.log(error);
         }
     },
 }
